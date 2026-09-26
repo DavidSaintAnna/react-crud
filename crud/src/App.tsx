@@ -18,20 +18,24 @@ function App() {
     } = useTodos();
 
     return (
-        <>
-        <h1>TODO</h1>
-        <TodoForm onAdd={addTodo}/>
-        <TodoFilter/>
-        <TodoList
-            todos= {todos}
+      <>
+        <header>
+          <h1>TODO</h1>
+        </header>
+        <main>
+          <TodoForm onAdd={addTodo} />
+          <TodoFilter />
+          <TodoList
+            todos={todos}
             editingId={editingId}
             editText={editText}
             onEditChange={handleEditChange}
             onStartEdit={startEdit}
             onSaveEdit={saveEdit}
             onDelete={deleteTodo}
-        />
-        </>
+          />
+        </main>
+      </>
     );
 }
 

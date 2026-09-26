@@ -20,20 +20,33 @@ function TodoItem ({
     onDelete,
 }: TodoItemProps) {
     return (
-        <p>
-            {isEditing ? (
-           <>
-            <input type="text" value={editText} onChange={onEditChange} />
-            <button onClick={onSaveEdit}>✅</button>
-           </> 
-         ) : (
+      <div className="todo-items">
+        <div className="action-icons">
+          {isEditing ? (
             <>
-            {todo.title}
-            <button onClick={onStartEdit}>✏️</button>
+              <input
+                type="text"
+                className="edit-input"
+                value={editText}
+                onChange={onEditChange}
+              />
+              <button className="icon-button save" onClick={onSaveEdit}>
+                ✅
+              </button>
             </>
-         )}
-        <button onClick={onDelete}>🗑️</button>
-        </p>
+          ) : (
+            <>
+              <span>{todo.title}</span>
+              <button className="icon-button edit" onClick={onStartEdit}>
+                ✏️
+              </button>
+            </>
+          )}
+          <button className="icon-button delete" onClick={onDelete}>
+            🗑️
+          </button>
+        </div>
+      </div>
     );
 }
 

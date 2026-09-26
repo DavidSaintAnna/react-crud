@@ -19,9 +19,9 @@ function handleSubmit() {
 }
 
 return (
-    <div>
-        <input type="text" value={text} onChange={handleChange} />
-        <button onClick={handleSubmit}>Add</button>
+    <div className="main-section">
+        <input type="text" className="create-input" value={text} onChange={handleChange} />
+        <button className="add-button" onClick={handleSubmit}>Add</button>
     </div>
 )
 }
