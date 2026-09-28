@@ -1,11 +1,16 @@
 import { useState } from "react";
-import type { Todo } from "../types";
+import type { Todo, Filter} from "../types";
+
+
+
+
 
 export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [filter, setFilter] = useState<Filter>("all");
 
   function addTodo(title: string) {
     if (title.trim() === "") return;
@@ -53,13 +58,24 @@ export function useTodos() {
     setSearchQuery(event.target.value);
   }
 
-  const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchQuery.trim().toLowerCase()),
-  );
+  const filteredTodos = todos.filter((todo) => {
+    const matchesSearch = todo.title
+      .toLowerCase()
+      .includes(searchQuery.trim().toLowerCase());
+
+    const matchesFilter =
+      filter === "all" ||
+      (filter === "done" && todo.completed) ||
+      (filter === "pending" && !todo.completed);
+
+    return matchesSearch && matchesFilter;
+  });
 
   return {
     todos,
     filteredTodos,
+    filter,
+    setFilter,
     addTodo,
     deleteTodo,
     toggleTodo,

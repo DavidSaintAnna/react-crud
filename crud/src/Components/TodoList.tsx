@@ -5,7 +5,7 @@ interface TodoListProps {
   todos: Todo[];
   editingId: string | null;
   editText: string;
-  hasSearch: boolean;
+  isFiltering:boolean;
   onEditChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onStartEdit: (id: string, currentTitle: string) => void;
   onSaveEdit: () => void;
@@ -15,7 +15,7 @@ interface TodoListProps {
 
 function TodoList({
   todos,
-   hasSearch,
+   isFiltering,
   editingId,
   editText,
   onEditChange,
@@ -27,7 +27,7 @@ function TodoList({
   if (todos.length === 0) {
      return (
       <p className="empty-state">
-        {hasSearch ? "No tasks match your search." : "No tasks yet."}
+        {isFiltering ? "No tasks match your search." : "No tasks yet."}
       </p>
      );
   }

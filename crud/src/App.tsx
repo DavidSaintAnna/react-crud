@@ -9,6 +9,8 @@ import "./App.css";
 function App() {
   const {
     filteredTodos,
+    filter,
+    setFilter,
     addTodo,
     deleteTodo,
     editingId,
@@ -30,11 +32,11 @@ function App() {
         <div className="todo-card">
           <TodoForm onAdd={addTodo} />
           <TodoSearch query={searchQuery} onSearch={handleSearchChange} />
-          <TodoFilter />
+          <TodoFilter filter={filter} onFilterChange={setFilter} />
         </div>
         <TodoList
           todos={filteredTodos}
-          hasSearch={searchQuery.trim() !== ""}
+          isFiltering={searchQuery.trim() !== "" || filter !== "all"}
           editingId={editingId}
           editText={editText}
           onEditChange={handleEditChange}

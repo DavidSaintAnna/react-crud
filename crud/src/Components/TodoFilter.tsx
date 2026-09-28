@@ -1,19 +1,28 @@
-import { useState } from "react";
 
-const FILTERS = ["All", "Pending", "Done"] as const;
+import type { Filter } from "../types";
 
-function TodoFilter() {
-  const [active, setActive] = useState<(typeof FILTERS)[number]>("All");
+const FILTERS: { value: Filter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "pending", label: "Pending" },
+  { value: "done", label: "Done" },
+];
 
+interface TodoFilterProps {
+  filter: Filter;
+  onFilterChange: (filter: Filter) => void;
+}
+
+function TodoFilter({ filter, onFilterChange }: TodoFilterProps) {
   return (
     <div className="filter-row">
-      {FILTERS.map((filter) => (
+      {FILTERS.map(({ value, label }) => (
         <button
-          key={filter}
-          className={`filter-button ${active === filter ? "active" : ""}`}
-          onClick={() => setActive(filter)}
+          key={value}
+          className={`filter-button ${filter === value ? "active" : ""}`}
+          onClick={() => onFilterChange(value)}
+          aria-pressed={filter === value}
         >
-          {filter}
+          {label}
         </button>
       ))}
     </div>
